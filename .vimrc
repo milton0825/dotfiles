@@ -10,6 +10,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
+" run :PluginInstall to install new plugins
 Plugin 'gmarik/Vundle.vim'
 " https://github.com/Valloric/YouCompleteMe
 " Plugin 'Valloric/YouCompleteMe'
