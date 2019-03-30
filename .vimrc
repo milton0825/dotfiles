@@ -19,7 +19,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 
 " https://vimawesome.com/plugin/ctrlp-vim-red
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " https://vimawesome.com/plugin/ag-vim
 Plugin 'rking/ag.vim'
@@ -63,6 +63,26 @@ set softtabstop=4
 " expandtab turns <TAB>s into spaces. 
 " So <TAB> just becomes a shortcut for insert four spaces.
 set expandtab 
+
+" }}}
+" ctrlp {{{
+"
+" Ignore files in .gitignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+" }}}
+" nerdtree {{{
+
+" open nerdtree with CTRL+n
+map <C-n> :NERDTreeToggle<CR>
+
+" close vim if nerdtree is the only window left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" open nerdtree when not opening file with vim
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
 
 " }}}
 " UI config {{{
