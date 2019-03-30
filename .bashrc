@@ -22,6 +22,7 @@ _complete_ssh_hosts ()
         return 0
 }
 complete -F _complete_ssh_hosts ssh
+complete -f _complete_ssh_hosts scp
 
 # Personal Alias
 alias rm='rm -i'
