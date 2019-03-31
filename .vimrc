@@ -13,7 +13,8 @@ call vundle#begin()
 " run :PluginInstall to install new plugins
 Plugin 'gmarik/Vundle.vim'
 " https://github.com/Valloric/YouCompleteMe
-" Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
+
 Plugin 'scrooloose/nerdtree'
 " https://vimawesome.com/plugin/fugitive-vim
 Plugin 'tpope/vim-fugitive'
@@ -23,6 +24,14 @@ Plugin 'ctrlpvim/ctrlp.vim'
 
 " https://vimawesome.com/plugin/ag-vim
 Plugin 'rking/ag.vim'
+
+" https://powerline.readthedocs.io/en/latest/
+Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+Plugin 'vim-scripts/indentpython.vim'
+
+Plugin 'nvie/vim-flake8'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()
@@ -71,7 +80,7 @@ set expandtab
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " }}}
-" nerdtree {{{
+" ner dtree {{{
 
 " open nerdtree with CTRL+n
 map <C-n> :NERDTreeToggle<CR>
@@ -83,6 +92,24 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
+" ignore files in NERDTree
+let NERDTreeIgnore=['\.pyc$', '\~$'] 
+
+" }}}
+" youcompleteme {{{
+
+"
+map <C-g> :YcmCompleter GoTo<CR> 
+
+" use virtualenv python interpreter
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
 
 " }}}
 " UI config {{{
@@ -192,6 +219,10 @@ augroup configgroup
     autocmd BufEnter *.sh setlocal shiftwidth=2
     autocmd BufEnter *.sh setlocal softtabstop=2
 augroup END
+" }}}
+" python {{{
+
+
 " }}}
 " custom functions {{{
 " strips trailing whitespace at the end of files. this

@@ -12,8 +12,12 @@ mv -f .bash_profile ~/.bash_profile
 ln -s ~/.bashrc .bashrc
 ln -s ~/.vimrc .vimrc
 
+
+./scripts/homebrew.sh
+./scripts/youcompleteme.sh
+
+
 # Install all vundle plugins
 vim +PluginInstall +qall
 
 
-./scripts/homebrew.sh

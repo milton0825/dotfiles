@@ -18,4 +18,6 @@ echo "Updating and upgrading Homebrew..."; echo;
 yes | brew update &> /dev/null
 yes | brew upgrade &> /dev/null
 
-brew install git
+brew update
+brew install git vim macvim
+brew link macvim
